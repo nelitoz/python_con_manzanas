@@ -1,4 +1,2 @@
 # python_con_manzanas
-
-Scripts for Python Training
-
+Scripts para curso Python con Manzanas
