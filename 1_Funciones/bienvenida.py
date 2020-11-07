@@ -1,3 +1,5 @@
+    # programa para explicar el concepto de funcion basica
+
 def saludo():
     print "Bienvenido al programa" 
 
