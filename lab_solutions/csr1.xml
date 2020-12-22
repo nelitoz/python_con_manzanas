@@ -1,0 +1,14 @@
+<device xmlns="http://tail-f.com/ns/ncs">
+  <name>csr1</name>
+  <address>192.168.0.30</address>
+  <port>22</port>
+  <authgroup>default</authgroup>
+  <state>
+    <admin-state>unlocked</admin-state>
+  </state>
+  <device-type>
+    <cli>
+      <ned-id xmlns:cisco-ios-cli-3.8="http://tail-f.com/ns/ned-id/cisco-ios-cli-3.8">cisco-ios-cli-3.8:cisco-ios-cli-3.8</ned-id>
+    </cli>
+  </device-type>
+</device>

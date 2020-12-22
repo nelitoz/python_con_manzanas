@@ -1,0 +1,882 @@
+######################################################################################
+#################### Construct Infrastructure Automation Workflow #################### 
+######################################################################################
+
+********************************************
+****************** Task 1 ****************** 
+********************************************
+** Step 6 **
+pwd
+
+** Step 7 **
+pipenv install
+
+** Step 8 **
+pipenv shell
+. /home/student/.local/share/virtualenvs/working_directory-NLDM5Sxr/bin/activate
+
+** Step 9 **
+ssh-keygen -t rsa
+
+** Step 10 **
+ssh-copy-id root@server
+
+** Step 11 **
+ssh root@server
+
+** Step 12 **
+root@server:~# exit
+
+** Step 13 **
+ansible server -m ping
+
+********************************************
+****************** Task 2 ****************** 
+********************************************
+** Step 2 **
+- name: Initial system setup
+
+** Step 3 **
+- name: Initial system setup
+  hosts: server
+
+** Step 4 **
+- name: Initial system setup
+  hosts: server
+
+  tasks:
+    - name: Make sure ssh service is enabled upon system boot
+      service: name=ssh enabled=yes
+
+** Step 5 **
+ansible-playbook --syntax-check provision-server.yml 
+
+** Step 6 **
+ansible-playbook provision-server.yml
+
+
+********************************************
+****************** Task 3 ****************** 
+********************************************
+** Step 2 **
+#!/bin/bash
+
+** Step 3 **
+#!/bin/bash
+
+# force caller to enter password twice
+
+** Step 4 **
+#!/bin/bash
+
+# force caller to enter password twice
+read -s -p 'Enter password: ' pass1
+
+** Step 5 **
+#!/bin/bash
+
+# force caller to enter password twice
+read -s -p 'Enter password: ' pass1
+read -s -p 'Repeat password: ' pass2
+
+** Step 6 **
+#!/bin/bash
+# force caller to enter password twice
+read -s -p 'Enter password: ' pass1
+read -s -p 'Repeat password: ' pass2
+
+# make sure passwords match
+
+** Step 7 **
+#!/bin/bash
+# force caller to enter password twice
+read -s -p 'Enter password: ' pass1
+read -s -p 'Repeat password: ' pass2
+
+# make sure passwords match
+if [ $pass1 != $pass2 ]; then
+
+** Step 8 **
+#!/bin/bash
+# force caller to enter password twice
+read -s -p 'Enter password: ' pass1
+read -s -p 'Repeat password: ' pass2
+
+# make sure passwords match
+if [ $pass1 != $pass2 ]; then
+        echo "passwords do not match"
+        exit 2
+fi
+
+** Step 9 **
+#!/bin/bash
+# force caller to enter password twice
+read -s -p 'Enter password: ' pass1
+read -s -p 'Repeat password: ' pass2
+
+# make sure passwords match
+if [ $pass1 != $pass2 ]; then
+        echo "passwords do not match"
+        exit 2
+fi
+
+# return sha512 hash
+
+** Step 10 **
+#!/bin/bash
+
+# force caller to enter password twice
+read -s -p 'Enter password: ' pass1
+read -s -p 'Repeat password: ' pass2
+
+# make sure passwords match
+if [ $pass1 != $pass2 ]; then
+        echo "passwords do not match"
+        exit 2
+fi
+
+# return sha512 hash
+echo $pass1 | mkpasswd --method=sha-512 --stdin
+
+** Step 11 **
+chmod 700 make_password.sh
+
+** Step 12 **
+./make_password.sh 
+
+** Step 13 **
+- name: Initial system setup
+  hosts: server
+
+  tasks:
+    - name: Make sure ssh service is enabled upon system boot
+      service: name=ssh enabled=yes
+    
+    - name: Create admin group
+      group: name=admin state=present
+
+** Step 14 **
+- name: Initial system setup
+  hosts: server
+
+  tasks:
+    - name: Make sure ssh service is enabled upon system boot
+      service: name=ssh enabled=yes
+    
+    - name: Create admin group
+      group: name=admin state=present
+
+    - name: Create admin user
+      user: 
+        name: admin
+        group: admin
+        home: /home/admin 
+        password: $6$EsC9meJyM$eOumIORpN7GEzlt6A.Sev2OPv9wUjiTQniy2WZ2WYQogReCUtL6Zke8EpLsBE5JIqQkr5aKGSdUNS5z/bqDls/
+        shell: /bin/bash
+        state: present
+
+********************************************
+****************** Task 4 ****************** 
+********************************************
+** Step 1 **
+- name: Initial system setup
+  hosts: server
+
+  tasks:
+    - name: Make sure ssh service is enabled upon system boot
+      service: name=ssh enabled=yes
+    
+    - name: Create admin group
+      group: name=admin state=present
+
+    - name: Create admin user
+      user: 
+        name: admin
+        group: admin
+        home: /home/admin 
+        password: $6$EsC9meJyM$eOumIORpN7GEzlt6A.Sev2OPv9wUjiTQniy2WZ2WYQogReCUtL6Zke8EpLsBE5JIqQkr5aKGSdUNS5z/bqDls/
+        shell: /bin/bash
+        state: present
+
+    - name: Install TFTP server packages
+      package: name=tftpd-hpa state=present
+
+** Step 2 **
+- name: Initial system setup
+  hosts: server
+
+  tasks:
+    - name: Make sure ssh service is enabled upon system boot
+      service: name=ssh enabled=yes
+    
+    - name: Create admin group
+      group: name=admin state=present
+
+    - name: Create admin user
+      user: 
+        name: admin
+        group: admin
+        home: /home/admin 
+        password: $6$EsC9meJyM$eOumIORpN7GEzlt6A.Sev2OPv9wUjiTQniy2WZ2WYQogReCUtL6Zke8EpLsBE5JIqQkr5aKGSdUNS5z/bqDls/
+        shell: /bin/bash
+        state: present
+
+    - name: Install TFTP server packages
+      package: name=tftpd-hpa state=present
+
+    - name: Configure TFTP server for write access
+      lineinfile:
+        path: /etc/default/tftpd-hpa
+        line: 'TFTP_OPTIONS="--secure --verbose -4 -c"'
+        state: present
+
+** Step 3 **
+- name: Initial system setup
+  hosts: server
+
+  tasks:
+    - name: Make sure ssh service is enabled upon system boot
+      service: name=ssh enabled=yes
+    
+    - name: Create admin group
+      group: name=admin state=present
+
+    - name: Create admin user
+      user: 
+        name: admin
+        group: admin
+        home: /home/admin 
+        password: $6$EsC9meJyM$eOumIORpN7GEzlt6A.Sev2OPv9wUjiTQniy2WZ2WYQogReCUtL6Zke8EpLsBE5JIqQkr5aKGSdUNS5z/bqDls/
+        shell: /bin/bash
+        state: present
+
+    - name: Install TFTP server packages
+      package: name=tftpd-hpa state=present
+
+    - name: Configure TFTP server for write access
+      lineinfile:
+        path: /etc/default/tftpd-hpa
+        line: 'TFTP_OPTIONS="--secure --verbose -4 -c"'
+        state: present
+
+    - name: Configure /var/lib/tftpboot permissions
+      file: path=/var/lib/tftpboot owner=root group=tftp mode=0775
+
+** Step 4 **
+- name: Initial system setup
+  hosts: server
+
+  tasks:
+    - name: Make sure ssh service is enabled upon system boot
+      service: name=ssh enabled=yes
+    
+    - name: Create admin group
+      group: name=admin state=present
+
+    - name: Create admin user
+      user: 
+        name: admin
+        group: admin
+        home: /home/admin 
+        password: $6$EsC9meJyM$eOumIORpN7GEzlt6A.Sev2OPv9wUjiTQniy2WZ2WYQogReCUtL6Zke8EpLsBE5JIqQkr5aKGSdUNS5z/bqDls/
+        shell: /bin/bash
+        state: present
+
+    - name: Install TFTP server packages
+      package: name=tftpd-hpa state=present
+
+    - name: Configure TFTP server for write access
+      lineinfile:
+        path: /etc/default/tftpd-hpa
+        line: 'TFTP_OPTIONS="--secure --verbose -4 -c"'
+        state: present
+
+    - name: Configure /var/lib/tftpboot permissions
+      file: path=/var/lib/tftpboot owner=root group=tftp mode=0775
+
+    - name: Start tftpd-hpa service and enable it upon system boot
+      service: name=tftpd-hpa state=restarted enabled=yes
+
+** Step 5 **
+ansible-playbook --syntax-check provision-server.yml
+
+** Step 6 **
+ansible-playbook provision-server.yml
+
+********************************************
+****************** Task 5 ****************** 
+********************************************
+** Step 2 **
+<device xmlns="http://tail-f.com/ns/ncs">
+</device>
+
+** Step 3 **
+<device xmlns="http://tail-f.com/ns/ncs">
+  <name>csr1</name>
+</device>
+
+** Step 4 **
+<device xmlns="http://tail-f.com/ns/ncs">
+  <name>csr1</name>
+  <address>192.168.0.30</address>
+</device>
+
+** Step 5 **
+<device xmlns="http://tail-f.com/ns/ncs">
+  <name>csr1</name>
+  <address>192.168.0.30</address>
+  <port>22</port>
+</device>
+
+** Step 6 **
+<device xmlns="http://tail-f.com/ns/ncs">
+  <name>csr1</name>
+  <address>192.168.0.30</address>
+  <port>22</port>
+  <authgroup>default</authgroup>
+</device>
+
+** Step 7 **
+<device xmlns="http://tail-f.com/ns/ncs">
+  <name>csr1</name>
+  <address>192.168.0.30</address>
+  <port>22</port>
+  <authgroup>default</authgroup>
+  <state>
+  </state>
+  <device-type>
+  </device-type>
+</device>
+
+** Step 8 **
+<device xmlns="http://tail-f.com/ns/ncs">
+  <name>csr1</name>
+  <address>192.168.0.30</address>
+  <port>22</port>
+  <authgroup>default</authgroup>
+  <state>
+    <admin-state>unlocked</admin-state>
+  </state>
+  <device-type>
+  </device-type>
+</device>
+
+** Step 9 **
+<device xmlns="http://tail-f.com/ns/ncs">
+  <name>csr1</name>
+  <address>192.168.0.30</address>
+  <port>22</port>
+  <authgroup>default</authgroup>
+  <state>
+    <admin-state>unlocked</admin-state>
+  </state>
+  <device-type>
+    <cli>
+    </cli>
+  </device-type>
+</device>
+
+** Step 10 **
+<device xmlns="http://tail-f.com/ns/ncs">
+  <name>csr1</name>
+  <address>192.168.0.30</address>
+  <port>22</port>
+  <authgroup>default</authgroup>
+  <state>
+    <admin-state>unlocked</admin-state>
+  </state>
+  <device-type>
+    <cli>
+      <ned-id xmlns:cisco-ios-cli-3.8="http://tail-f.com/ns/ned-id/cisco-ios-cli-3.8">cisco-ios-cli-3.8:cisco-ios-cli-3.8</ned-id>
+    </cli>
+  </device-type>
+</device>
+
+** Step 12 **
+import requests
+
+** Step 13 **
+import requests
+
+# credentials
+API_USER = 'admin'
+API_PASS = 'admin'
+# nso server address
+API_BASE = 'http://nso:8080'
+# api headers
+API_HEAD = {
+    'Accept': 'application/vnd.yang.data+xml'
+}
+
+** Step 14 **
+import requests
+
+# credentials
+API_USER = 'admin'
+API_PASS = 'admin'
+# nso server address
+API_BASE = 'http://nso:8080'
+# api headers
+API_HEAD = {
+    'Accept': 'application/vnd.yang.data+xml'
+}
+
+api_session = requests.Session()
+
+** Step 15 **
+import requests
+
+# credentials
+API_USER = 'admin'
+API_PASS = 'admin'
+# nso server address
+API_BASE = 'http://nso:8080'
+# api headers
+API_HEAD = {
+    'Accept': 'application/vnd.yang.data+xml'
+}
+
+api_session = requests.Session()
+api_session.auth = (API_USER, API_PASS)
+
+** Step 16 **
+import requests
+
+# credentials
+API_USER = 'admin'
+API_PASS = 'admin'
+# nso server address
+API_BASE = 'http://nso:8080'
+# api headers
+API_HEAD = {
+    'Accept': 'application/vnd.yang.data+xml'
+}
+
+api_session = requests.Session()
+api_session.auth = (API_USER, API_PASS)
+
+# create nso device from csr1.xml
+api_endpoint = f'{API_BASE}/api/running/devices/device/csr1'
+
+** Step 17 **
+import requests
+
+# credentials
+API_USER = 'admin'
+API_PASS = 'admin'
+# nso server address
+API_BASE = 'http://nso:8080'
+# api headers
+API_HEAD = {
+    'Accept': 'application/vnd.yang.data+xml'
+}
+
+api_session = requests.Session()
+api_session.auth = (API_USER, API_PASS)
+
+# create nso device from csr1.xml
+api_endpoint = f'{API_BASE}/api/running/devices/device/csr1'
+with open('csr1.xml') as xml:
+    api_response = api_session.put(api_endpoint, headers=API_HEAD, data=xml)
+
+** Step 18 **
+import requests
+
+# credentials
+API_USER = 'admin'
+API_PASS = 'admin'
+# nso server address
+API_BASE = 'http://nso:8080'
+# api headers
+API_HEAD = {
+    'Accept': 'application/vnd.yang.data+xml'
+}
+
+api_session = requests.Session()
+api_session.auth = (API_USER, API_PASS)
+
+# create nso device from csr1.xml
+api_endpoint = f'{API_BASE}/api/running/devices/device/csr1'
+with open('csr1.xml') as xml:
+    api_response = api_session.put(api_endpoint, headers=API_HEAD, data=xml)
+print(f'-> PUT: {api_endpoint}')
+print(f'  -> RESPONSE: {api_response.status_code}')
+
+** Step 19 **
+import requests
+
+# credentials
+API_USER = 'admin'
+API_PASS = 'admin'
+# nso server address
+API_BASE = 'http://nso:8080'
+# api headers
+API_HEAD = {
+    'Accept': 'application/vnd.yang.data+xml'
+}
+
+api_session = requests.Session()
+api_session.auth = (API_USER, API_PASS)
+
+# create nso device from csr1.xml
+api_endpoint = f'{API_BASE}/api/running/devices/device/csr1'
+with open('csr1.xml') as xml:
+    api_response = api_session.put(api_endpoint, headers=API_HEAD, data=xml)
+print(f'-> PUT: {api_endpoint}')
+print(f'  -> RESPONSE: {api_response.status_code}')
+
+# tell nso to fetch ssh keys
+
+** Step 20 **
+import requests
+
+# credentials
+API_USER = 'admin'
+API_PASS = 'admin'
+# nso server address
+API_BASE = 'http://nso:8080'
+# api headers
+API_HEAD = {
+    'Accept': 'application/vnd.yang.data+xml'
+}
+
+api_session = requests.Session()
+api_session.auth = (API_USER, API_PASS)
+
+# create nso device from csr1.xml
+api_endpoint = f'{API_BASE}/api/running/devices/device/csr1'
+with open('csr1.xml') as xml:
+    api_response = api_session.put(api_endpoint, headers=API_HEAD, data=xml)
+print(f'-> PUT: {api_endpoint}')
+print(f'  -> RESPONSE: {api_response.status_code}')
+
+# tell nso to fetch ssh keys
+api_endpoint = f'{API_BASE}/api/running/devices/device/csr1/ssh/_operations/fetch-host-keys'
+
+** Step 21 **
+import requests
+
+# credentials
+API_USER = 'admin'
+API_PASS = 'admin'
+# nso server address
+API_BASE = 'http://nso:8080'
+# api headers
+API_HEAD = {
+    'Accept': 'application/vnd.yang.data+xml'
+}
+
+api_session = requests.Session()
+api_session.auth = (API_USER, API_PASS)
+
+# create nso device from csr1.xml
+api_endpoint = f'{API_BASE}/api/running/devices/device/csr1'
+with open('csr1.xml') as xml:
+    api_response = api_session.put(api_endpoint, headers=API_HEAD, data=xml)
+print(f'-> PUT: {api_endpoint}')
+print(f'  -> RESPONSE: {api_response.status_code}')
+
+# tell nso to fetch ssh keys
+api_endpoint = f'{API_BASE}/api/running/devices/device/csr1/ssh/_operations/fetch-host-keys'
+api_response = api_session.post(api_endpoint, headers=API_HEAD)
+
+** Step 22 **
+import requests
+
+# credentials
+API_USER = 'admin'
+API_PASS = 'admin'
+# nso server address
+API_BASE = 'http://nso:8080'
+# api headers
+API_HEAD = {
+    'Accept': 'application/vnd.yang.data+xml'
+}
+
+api_session = requests.Session()
+api_session.auth = (API_USER, API_PASS)
+
+# create nso device from csr1.xml
+api_endpoint = f'{API_BASE}/api/running/devices/device/csr1'
+with open('csr1.xml') as xml:
+    api_response = api_session.put(api_endpoint, headers=API_HEAD, data=xml)
+print(f'-> PUT: {api_endpoint}')
+print(f'  -> RESPONSE: {api_response.status_code}')
+
+# tell nso to fetch ssh keys
+api_endpoint = f'{API_BASE}/api/running/devices/device/csr1/ssh/_operations/fetch-host-keys'
+api_response = api_session.post(api_endpoint, headers=API_HEAD)
+print(f'-> POST: {api_endpoint}')
+print(f'  -> RESPONSE: {api_response.status_code}')
+
+** Step 23 **
+import requests
+
+# credentials
+API_USER = 'admin'
+API_PASS = 'admin'
+# nso server address
+API_BASE = 'http://nso:8080'
+# api headers
+API_HEAD = {
+    'Accept': 'application/vnd.yang.data+xml'
+}
+
+api_session = requests.Session()
+api_session.auth = (API_USER, API_PASS)
+
+# create nso device from csr1.xml
+api_endpoint = f'{API_BASE}/api/running/devices/device/csr1'
+with open('csr1.xml') as xml:
+    api_response = api_session.put(api_endpoint, headers=API_HEAD, data=xml)
+print(f'-> PUT: {api_endpoint}')
+print(f'  -> RESPONSE: {api_response.status_code}')
+
+# tell nso to fetch ssh keys
+api_endpoint = f'{API_BASE}/api/running/devices/device/csr1/ssh/_operations/fetch-host-keys'
+api_response = api_session.post(api_endpoint, headers=API_HEAD)
+print(f'-> POST: {api_endpoint}')
+print(f'  -> RESPONSE: {api_response.status_code}')
+
+# tell nso to sync configuration from device
+
+** Step 24 **
+import requests
+
+# credentials
+API_USER = 'admin'
+API_PASS = 'admin'
+# nso server address
+API_BASE = 'http://nso:8080'
+# api headers
+API_HEAD = {
+    'Accept': 'application/vnd.yang.data+xml'
+}
+
+api_session = requests.Session()
+api_session.auth = (API_USER, API_PASS)
+
+# create nso device from csr1.xml
+api_endpoint = f'{API_BASE}/api/running/devices/device/csr1'
+with open('csr1.xml') as xml:
+    api_response = api_session.put(api_endpoint, headers=API_HEAD, data=xml)
+print(f'-> PUT: {api_endpoint}')
+print(f'  -> RESPONSE: {api_response.status_code}')
+
+# tell nso to fetch ssh keys
+api_endpoint = f'{API_BASE}/api/running/devices/device/csr1/ssh/_operations/fetch-host-keys'
+api_response = api_session.post(api_endpoint, headers=API_HEAD)
+print(f'-> POST: {api_endpoint}')
+print(f'  -> RESPONSE: {api_response.status_code}')
+
+# tell nso to sync configuration from device
+api_endpoint = f'{API_BASE}/api/running/devices/device/csr1/_operations/sync-from'
+
+** Step 25 **
+import requests
+
+# credentials
+API_USER = 'admin'
+API_PASS = 'admin'
+# nso server address
+API_BASE = 'http://nso:8080'
+# api headers
+API_HEAD = {
+    'Accept': 'application/vnd.yang.data+xml'
+}
+
+api_session = requests.Session()
+api_session.auth = (API_USER, API_PASS)
+
+# create nso device from csr1.xml
+api_endpoint = f'{API_BASE}/api/running/devices/device/csr1'
+with open('csr1.xml') as xml:
+    api_response = api_session.put(api_endpoint, headers=API_HEAD, data=xml)
+print(f'-> PUT: {api_endpoint}')
+print(f'  -> RESPONSE: {api_response.status_code}')
+
+# tell nso to fetch ssh keys
+api_endpoint = f'{API_BASE}/api/running/devices/device/csr1/ssh/_operations/fetch-host-keys'
+api_response = api_session.post(api_endpoint, headers=API_HEAD)
+print(f'-> POST: {api_endpoint}')
+print(f'  -> RESPONSE: {api_response.status_code}')
+
+# tell nso to sync configuration from device
+api_endpoint = f'{API_BASE}/api/running/devices/device/csr1/_operations/sync-from'
+api_response = api_session.post(api_endpoint, headers=API_HEAD)
+
+** Step 26 **
+import requests
+
+# credentials
+API_USER = 'admin'
+API_PASS = 'admin'
+# nso server address
+API_BASE = 'http://nso:8080'
+# api headers
+API_HEAD = {
+    'Accept': 'application/vnd.yang.data+xml'
+}
+
+api_session = requests.Session()
+api_session.auth = (API_USER, API_PASS)
+
+# create nso device from csr1.xml
+api_endpoint = f'{API_BASE}/api/running/devices/device/csr1'
+with open('csr1.xml') as xml:
+    api_response = api_session.put(api_endpoint, headers=API_HEAD, data=xml)
+print(f'-> PUT: {api_endpoint}')
+print(f'  -> RESPONSE: {api_response.status_code}')
+
+# tell nso to fetch ssh keys
+api_endpoint = f'{API_BASE}/api/running/devices/device/csr1/ssh/_operations/fetch-host-keys'
+api_response = api_session.post(api_endpoint, headers=API_HEAD)
+print(f'-> POST: {api_endpoint}')
+print(f'  -> RESPONSE: {api_response.status_code}')
+
+# tell nso to sync configuration from device
+api_endpoint = f'{API_BASE}/api/running/devices/device/csr1/_operations/sync-from'
+api_response = api_session.post(api_endpoint, headers=API_HEAD)
+print(f'-> POST: {api_endpoint}')
+print(f'  -> RESPONSE: {api_response.status_code}')
+
+** Step 27 **
+python nso_device.py 
+
+
+********************************************
+****************** Task 6 ****************** 
+********************************************
+** Step 2 **
+<config>
+</config>
+
+** Step 3 **
+<config>
+  <archive xmlns="urn:ios">
+  </archive>
+</config>
+
+** Step 4 **
+<config>
+  <archive xmlns="urn:ios">
+    <path>tftp://192.168.0.20/$h</path>
+  </archive>
+</config>
+
+** Step 5 **
+<config>
+  <archive xmlns="urn:ios">
+    <path>tftp://192.168.0.20/$h</path>
+    <write-memory/>
+  </archive>
+</config>
+
+** Step 7 **
+import requests
+
+# credentials
+API_USER = 'admin'
+API_PASS = 'admin'
+# nso server address
+API_BASE = 'http://nso:8080'
+# api headers
+API_HEAD = {
+    'Accept': 'application/vnd.yang.data+xml'
+}
+api_session = requests.Session()
+api_session.auth = (API_USER, API_PASS)
+
+** Step 8 **
+import requests
+
+# credentials
+API_USER = 'admin'
+API_PASS = 'admin'
+# nso server address
+API_BASE = 'http://nso:8080'
+# api headers
+API_HEAD = {
+    'Accept': 'application/vnd.yang.data+xml'
+}
+api_session = requests.Session()
+api_session.auth = (API_USER, API_PASS)
+
+# use archive.xml to configure csr1 using nso
+
+** Step 9 **
+import requests
+
+# credentials
+API_USER = 'admin'
+API_PASS = 'admin'
+# nso server address
+API_BASE = 'http://nso:8080'
+# api headers
+API_HEAD = {
+    'Accept': 'application/vnd.yang.data+xml'
+}
+api_session = requests.Session()
+api_session.auth = (API_USER, API_PASS)
+
+# use archive.xml to configure csr1 using nso
+api_endpoint = f'{API_BASE}/api/running/devices/device/csr1/config'
+
+** Step 10 **
+import requests
+
+# credentials
+API_USER = 'admin'
+API_PASS = 'admin'
+# nso server address
+API_BASE = 'http://nso:8080'
+# api headers
+API_HEAD = {
+    'Accept': 'application/vnd.yang.data+xml'
+}
+api_session = requests.Session()
+api_session.auth = (API_USER, API_PASS)
+
+# use archive.xml to configure csr1 using nso
+api_endpoint = f'{API_BASE}/api/running/devices/device/csr1/config'
+with open('archive.xml') as xml:
+    api_response = api_session.patch(api_endpoint, headers=API_HEAD, data=xml)
+
+** Step 11 **
+import requests
+# credentials
+API_USER = 'admin'
+API_PASS = 'admin'
+# nso server address
+API_BASE = 'http://nso:8080'
+# api headers
+API_HEAD = {
+    'Accept': 'application/vnd.yang.data+xml'
+}
+api_session = requests.Session()
+api_session.auth = (API_USER, API_PASS)
+# use archive.xml to configure csr1 using nso
+api_endpoint = f'{API_BASE}/api/running/devices/device/csr1/config'
+with open('archive.xml') as xml:
+    api_response = api_session.patch(api_endpoint, headers=API_HEAD, data=xml)
+print(f'-> PATCH: {api_endpoint}')
+print(f'  -> RESPONSE: {api_response.status_code}')
+
+** Step 12 **
+python nso_archive.py 
+
+
+********************************************
+****************** Task 7 ****************** 
+********************************************
+** Step 1 **
+ssh cisco@csr1
+
+** Step 2 **
+show archive
+
+** Step 3 **
+write
+
+** Step 4 **
+show archive
